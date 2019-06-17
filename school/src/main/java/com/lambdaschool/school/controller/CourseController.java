@@ -30,6 +30,16 @@ public class CourseController
         return new ResponseEntity<>(courseService.getCountStudentsInCourse(), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/courses/find/{courseId}",
+                produces = {"application/json"})
+    public ResponseEntity<?> getCourseById(
+            @PathVariable
+                    Long courseId)
+    {
+        Course c = courseService.findCourseById(courseId);
+        return new ResponseEntity<>(c, HttpStatus.OK);
+    }
+
     @DeleteMapping("/courses/{courseid}")
     public ResponseEntity<?> deleteCourseById(@PathVariable long courseid)
     {
