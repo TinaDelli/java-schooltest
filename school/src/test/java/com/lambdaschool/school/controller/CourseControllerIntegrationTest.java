@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
+import static org.hamcrest.number.OrderingComparison.lessThan;
 import static org.junit.Assert.*;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.runner.RunWith;
@@ -28,6 +30,12 @@ public class CourseControllerIntegrationTest
     @After
     public void tearDown() throws Exception
     {
+    }
+
+    @Test
+    public void whenMeasuredResponseTime()
+    {
+        given().when().get("/courses/courses").then().time(lessThan(5000L));
     }
 
     @Test
